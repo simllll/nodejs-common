@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/common?activeTab=versions
 
+### [3.0.1](https://www.github.com/googleapis/nodejs-common/compare/v3.0.0...v3.0.1) (2020-04-01)
+
+
+### Bug Fixes
+
+* **deps:** update dependency google-auth-library to v6 ([#556](https://www.github.com/googleapis/nodejs-common/issues/556)) ([03a8a54](https://www.github.com/googleapis/nodejs-common/commit/03a8a542ac329f63776388346d1f74732b0ab984))
+
 ## [3.0.0](https://www.github.com/googleapis/nodejs-common/compare/v2.4.0...v3.0.0) (2020-03-26)
 
 
