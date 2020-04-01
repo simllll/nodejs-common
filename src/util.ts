@@ -354,24 +354,29 @@ export class Util {
   ) {
     callback = callback || util.noop;
 
-    const parsedResp = extend(
-      true,
-      {err: err || null},
-      resp && util.parseHttpRespMessage(resp),
-      body && util.parseHttpRespBody(body)
-    );
-    // Assign the parsed body to resp.body, even if { json: false } was passed
-    // as a request option.
-    // We assume that nobody uses the previously unparsed value of resp.body.
-    if (!parsedResp.err && resp && typeof parsedResp.body === 'object') {
-      parsedResp.resp.body = parsedResp.body;
-    }
+    try {
+      const parsedResp = extend(
+       true,
+       {err: err || null},
+       resp && util.parseHttpRespMessage(resp),
+       body && util.parseHttpRespBody(body)
+      );
+      // Assign the parsed body to resp.body, even if { json: false } was passed
+      // as a request option.
+      // We assume that nobody uses the previously unparsed value of resp.body.
+      if (!parsedResp.err && resp && typeof parsedResp.body === 'object') {
+       parsedResp.resp.body = parsedResp.body;
+      }
 
-    if (parsedResp.err && resp) {
-      parsedResp.err.response = resp;
-    }
+      if (parsedResp.err && resp) {
+       parsedResp.err.response = resp;
+      }
 
-    callback(parsedResp.err, parsedResp.body, parsedResp.resp);
+      callback(parsedResp.err, parsedResp.body, parsedResp.resp);
+    } catch (err) {
+      // Catches any fatal parsing errors, and forwards the error to the callback 
+      callback(err);
+    }
   }
 
   /**
